@@ -1,0 +1,16 @@
+- name: Introduction
+  href: intro.md
+- name: Readme Page
+  href: README.md
+- name: DocFX Tutorial
+  href: docfx.md
+- name: Project Structure
+  href: structure/overview.md
+  topicHref: structure/overview.md
+  items:
+    - name: "ClientProgram structure"
+      href: "structure/structureClient.md"
+      topicHref: "structure/structureClient.md"
+    - name: "SimulatorProgram structure"
+      href: "structure/structureServer.md"
+      topicHref: "structure/structureServer.md"

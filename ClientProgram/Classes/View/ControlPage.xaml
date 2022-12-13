@@ -1,0 +1,191 @@
+﻿<Page
+    x:Class="ClientProgram.ControlPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ClientProgram"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    RequestedTheme="Dark"
+    Background="#2b2b2b">
+
+    <Page.Resources>
+        <Style x:Key="text" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="slider" TargetType="Slider">
+            <Setter Property="Minimum" Value="0"/>
+            <Setter Property="Width" Value="150"/>
+        </Style>
+        <Style x:Key="switch" TargetType="ToggleSwitch">
+            <Setter Property="Width" Value="85"/>
+            <Setter Property="Margin" Value="20,0,20,0"/>
+            <Setter Property="OnContent" Value="ON"/>
+            <Setter Property="OffContent" Value="OFF"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <local:BoolToOpacityConverter x:Key="OpacityConverter"/>
+        <local:NumberToStringConverter x:Key="NumberConverter"/>
+    </Page.Resources>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel
+            Width="400"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center">
+
+            <StackPanel
+                Margin="0,0,0,20">
+                <TextBlock
+                    Style="{StaticResource text}">Thermostat:</TextBlock>
+                <StackPanel
+                    Orientation="Horizontal">
+
+                    <ToggleSwitch
+                        Style="{StaticResource switch}"
+                        IsEnabled="{x:Bind ClientCallsInstance.IsConnected, Mode=OneWay}"
+                        IsOn="{x:Bind ControlViewModel.ThermostatSwitch, Mode=TwoWay}"/>
+                    <Slider
+                        Style="{StaticResource slider}"
+                        Minimum="14"
+                        Maximum="40"
+                        IsEnabled="{x:Bind ControlViewModel.Slider1Enabled, Mode=OneWay}"
+                        Value="{x:Bind ControlViewModel.ThermostatSlider, Mode=TwoWay}"/>
+                    <TextBlock
+                        Margin="20,0,0,0"
+                        FontSize="14"
+                        Style="{StaticResource text}"
+                        Opacity="{x:Bind ControlViewModel.ThermostatSwitch, Mode=OneWay, Converter={StaticResource OpacityConverter}}"
+                        Text="{x:Bind ControlViewModel.ThermostatSlider, Mode=OneWay, Converter={StaticResource NumberConverter}}"/>
+                    <TextBlock
+                        FontSize="14"
+                        Style="{StaticResource text}"
+                        Opacity="{x:Bind ControlViewModel.ThermostatSwitch, Mode=OneWay, Converter={StaticResource OpacityConverter}}"
+                        Text=" °C"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel
+                Margin="0,0,0,20">
+
+                <TextBlock
+                    Style="{StaticResource text}">Speakers:</TextBlock>
+                <StackPanel
+                    Orientation="Horizontal">
+
+                    <ToggleSwitch
+                        Style="{StaticResource switch}"
+                        IsEnabled="{x:Bind ClientCallsInstance.IsConnected, Mode=OneWay}"
+                        IsOn="{x:Bind ControlViewModel.SpeakersSwitch, Mode=TwoWay}"/>
+                    <Slider
+                        Style="{StaticResource slider}"
+                        Minimum="0"
+                        Maximum="100"
+                        IsEnabled="{x:Bind ControlViewModel.Slider2Enabled, Mode=OneWay}"
+                        Value="{x:Bind ControlViewModel.SpeakersSlider, Mode=TwoWay}"/>
+                    <TextBlock
+                        Margin="20,0,0,0"
+                        FontSize="14"
+                        Style="{StaticResource text}"
+                        Opacity="{x:Bind ControlViewModel.SpeakersSwitch, Mode=OneWay, Converter={StaticResource OpacityConverter}}"
+                        Text="{x:Bind ControlViewModel.SpeakersSlider, Mode=OneWay, Converter={StaticResource NumberConverter}}"/>
+                    <TextBlock
+                        FontSize="14"
+                        Style="{StaticResource text}"
+                        Opacity="{x:Bind ControlViewModel.SpeakersSwitch, Mode=OneWay, Converter={StaticResource OpacityConverter}}"
+                        Text=" % volume"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel
+                Margin="0,0,0,20">
+
+                <TextBlock
+                    Style="{StaticResource text}">Humidifier:</TextBlock>
+                <StackPanel
+                    Orientation="Horizontal">
+
+                    <ToggleSwitch
+                        Style="{StaticResource switch}"
+                        IsEnabled="{x:Bind ClientCallsInstance.IsConnected, Mode=OneWay}"
+                        IsOn="{x:Bind ControlViewModel.HumidifierSwitch, Mode=TwoWay}"/>
+                    <Slider
+                        Style="{StaticResource slider}"
+                        Minimum="0"
+                        Maximum="100"
+                        IsEnabled="{x:Bind ControlViewModel.Slider3Enabled, Mode=OneWay}"
+                        Value="{x:Bind ControlViewModel.HumidifierSlider, Mode=TwoWay}"/>
+                    <TextBlock
+                        Margin="20,0,0,0"
+                        FontSize="14"
+                        Style="{StaticResource text}"
+                        Opacity="{x:Bind ControlViewModel.HumidifierSwitch, Mode=OneWay, Converter={StaticResource OpacityConverter}}"
+                        Text="{x:Bind ControlViewModel.HumidifierSlider, Mode=OneWay, Converter={StaticResource NumberConverter}}"/>
+                    <TextBlock
+                        FontSize="14"
+                        Style="{StaticResource text}"
+                        Opacity="{x:Bind ControlViewModel.HumidifierSwitch, Mode=OneWay, Converter={StaticResource OpacityConverter}}"
+                        Text=" %"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel
+                HorizontalAlignment="Center">
+
+                <TextBlock
+                    Style="{StaticResource text}">Lights:</TextBlock>
+                <ToggleSwitch
+                    Style="{StaticResource switch}"
+                    IsEnabled="{x:Bind ClientCallsInstance.IsConnected, Mode=OneWay}"
+                    IsOn="{x:Bind ControlViewModel.LightsSwitch, Mode=TwoWay}"/>
+            </StackPanel>
+
+        </StackPanel>
+
+        <StackPanel
+            Grid.Column="1"
+            VerticalAlignment="Center">
+
+            <TextBlock
+                Margin="0,0,0,10"
+                Style="{StaticResource text}"
+                Text="Update log:"/>
+
+            <TextBox
+                Name="LogBox"
+                MaxHeight="300"
+                TextWrapping="Wrap"
+                RequestedTheme="Dark"
+                IsReadOnly="True"
+                AcceptsReturn="True"
+                ScrollViewer.VerticalScrollMode="Auto"
+                ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    
+                Text="{x:Bind ControlViewModel.Info.LogBoxText, Mode=OneWay}">
+                <TextBox.Resources>
+                    <SolidColorBrush x:Key="TextControlBackground" Color="Black" Opacity="0.4"/>
+                    <SolidColorBrush x:Key="TextControlBorderBrush" Color="White" Opacity="0.4"/>
+                    <SolidColorBrush x:Key="TextControlForeground" Color="White"/>
+                    <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="Black" Opacity="0.4"/>
+                    <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="White" Opacity="0.6"/>
+                    <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="White"/>
+                    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="Black" Opacity="0.4"/>
+                    <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="White" Opacity="0.6"/>
+                    <SolidColorBrush x:Key="TextControlForegroundFocused" Color="White"/>
+                </TextBox.Resources>
+            </TextBox>
+            <Button
+                Margin="0,20,0,0"
+                HorizontalAlignment="Center"
+                Content="Save sensor values to file"
+                Command="{x:Bind ControlViewModel.SaveValuesCommand, Mode=OneWay}"/>
+        </StackPanel>
+    </Grid>
+</Page>
